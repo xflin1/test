@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>video-codec.js Camera Test</title>
+    <meta charset="UTF-8">
+    <script src="lib/libg723.js" type="text/javascript"></script>
+    <script src="audio/codec.js" type="text/javascript"></script>
+    <script src="audio/recorder.js" type="text/javascript"></script>
+    <script src="video/renderer.js" type="text/javascript"></script>
+    <script src="video/sylvester.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
+    <style>
+      * { font-size: small; }
+      fieldset { display: inline; padding: 0.5ex; margin-bottom: 1ex}
+    </style>
+  </head>
+  <body>
+    <div>
+      <div style="margin-bottom:1em">
+        <fieldset>
+          <legend>config</legend>
+          <label for="encoder">encoder:</label>
+          <select id="encoder" name="encoder">
+            <option value="x264">x264</option>
+            <option value="openh264">openH264</option>
+          </select>
+          <label for="renderer">renderer:</label>
+          <select id="renderer">
+            <option value="webgl">WebGL</option>
+            <option value="rgb">putImgDat</option>
+          </select>
+        </fieldset>
+        <fieldset id="x264cfg">
+          <legend>x264 config</legend>
+          <label for="x264rcmode">mode:</label>
+          <select id="x264rcmode" name="x264rcmode">
+            <option value="quality">Quality</option>
+            <option value="bitrate">Bitrate(kbps)</option>
+          </select>
+          <input type="number" min="0" max="51" step="0.1" id="x264quality" name="x264quality" value="23" style="width:4em;text-align:right">
+          <input type="number" min="0" max="300000" step="10" id="x264bitrate" name="x264bitrate" value="1000" size="4" style="width:4em;text-align:right">
+          <label for="x264presets">preset:</label>
+          <select id="x264presets" name="x264presets">
+            <option value="ultrafast" selected>UltraFast</option>
+            <option value="superfast">SuperFast</option>
+            <option value="veryfast">VeryFast</option>
+            <option value="faster">Faster</option>
+            <option value="fast">Fast</option>
+            <option value="medium">Medium</option>
+            <option value="slow">Slow</option>
+            <option value="slower">Slower</option>
+            <option value="veryslow">VerySlow</option>
+            <option value="placebo">Placebo</option>
+          </select>
+          <label for="x264tune">tune:</label>
+          <select id="x264tune" name="x264tune">
+            <option value="" selected>default</option>
+            <option value="film">film</option>
+            <option value="animation">animation</option>
+            <option value="grain">grain</option>
+            <option value="stillimage">stillimage</option>
+            <option value="psnr">psnr</option>
+            <option value="ssim">ssim</option>
+            <option value="fastdecode">fastdecode</option>
+            <option value="zerolatency">zerolatency</option>
+          </select>
+        </fieldset>
+        <fieldset id="openh264cfg">
+          <legend>openH264 config</legend>
+          <label for="openh264bitrate">bitrate(in 24fps, kbps):</label>
+          <input type="number" min="0" max="300000" step="10" id="openh264bitrate" name="openh264bitrate" value="1000" size="4" style="width:4em;text-align:right">
+        </fieldset>
+		<br/>
+		<fieldset id="encoder">
+		     <label>encoding size:</label>
+			 <input type="number" min="100" max="640" step="10" id="srcWidth" name="srcWidth" value="200" style="width:4em;text-align:right">
+			 <input type="number" min="100" max="480" step="10" id="srcHeight" name="srcHeight" value="150" style="width:4em;text-align:right">
+		</fieldset>		
+		<fieldset id="decoder">
+		     <label>decoding size:</label>
+			 <input type="number" min="100" max="1280" step="10" id="dstWidth" name="dstWidth" value="320" style="width:4em;text-align:right">
+			 <input type="number" min="100" max="720" step="10" id="dstHeight" name="dstHeight" value="240" style="width:4em;text-align:right">
+		</fieldset>		
+
+
+        <button id="start">start</button>
+        <div id="status">(- fps - kbps - kbit/frame (avg: - fps - kbps -kbit/frame)</div>
+      </div>
+      <div style="display: inline-block">
+        <div>video</div>
+        <video id="videosrc" widht=80 height=80 ></video>
+      </div>
+      <div style="display: inline-block">
+        <div>source</div>
+        <canvas id="canvas_src"></canvas>
+      </div>
+      <div style="display: inline-block">
+        <div>decoded_1</div>
+        <canvas id="canvas_dst_1"></canvas>
+      </div>
+      <div style="display: inline-block">
+        <div>decoded_2</div>
+        <canvas id="canvas_dst_2"></canvas>
+      </div>
+      <div style="display: inline-block">
+        <div>decoded_3</div>
+        <canvas id="canvas_dst_3"></canvas>
+      </div>
+      <div style="display: inline-block">
+        <div>decoded_4</div>
+        <canvas id="canvas_dst_4"></canvas>
+      </div>
+      <div style="display: inline-block">
+        <div>decoded_5</div>
+        <canvas id="canvas_dst_5"></canvas>
+      </div>
+    </div>
+  </body>
+</html>
